@@ -218,25 +218,29 @@ ELSE()
 	ADD_DEFINITIONS(-DNO_OPENGL3)
 ENDIF(BUILD_OPENGL3_DEMOS)
 
-OPTION(BUILD_BULLET2_DEMOS "Set when you want to build the Bullet 2 demos" ON)
-IF(BUILD_BULLET2_DEMOS)
+#OPTION(BUILD_BULLET2_DEMOS "Set when you want to build the Bullet 2 demos" ON)
+#IF(BUILD_BULLET2_DEMOS)
 
-	IF(EXISTS ${BULLET_PHYSICS_SOURCE_DIR}/examples AND IS_DIRECTORY ${BULLET_PHYSICS_SOURCE_DIR}/examples)
-		SUBDIRS(examples)
-	ENDIF()
-ENDIF(BUILD_BULLET2_DEMOS)
+#	IF(EXISTS ${BULLET_PHYSICS_SOURCE_DIR}/examples AND IS_DIRECTORY ${BULLET_PHYSICS_SOURCE_DIR}/examples)
+#		SUBDIRS(examples)
+#	ENDIF()
+#ENDIF(BUILD_BULLET2_DEMOS)
 
 
 
-OPTION(BUILD_EXTRAS "Set when you want to build the extras" ON)
-IF(BUILD_EXTRAS)
-  SUBDIRS(Extras)
-ENDIF(BUILD_EXTRAS)
+#OPTION(BUILD_EXTRAS "Set when you want to build the extras" ON)
+#IF(BUILD_EXTRAS)
+#  SUBDIRS(Extras)
+#ENDIF(BUILD_EXTRAS)
 
 
 #Maya Dynamica plugin is moved to http://dynamica.googlecode.com
 
-SUBDIRS(src)
+SUBDIRS(src/BulletCollision)
+SUBDIRS(src/BulletDynamics)
+SUBDIRS(src/BulletInverseDynamics)
+SUBDIRS(src/BulletSoftBody)
+SUBDIRS(src/LinearMath)
 
 IF("${CMAKE_GENERATOR}" MATCHES "Unix Makefiles")
 	OPTION(INSTALL_LIBS "Set when you want to install libraries" ON)
@@ -270,12 +274,12 @@ IF (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} GREATER 2.5)
 	OPTION(INSTALL_EXTRA_LIBS "Set when you want extra libraries installed" OFF)
 ENDIF (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} GREATER 2.5)
 
-OPTION(BUILD_UNIT_TESTS "Build Unit Tests"	ON)
+#OPTION(BUILD_UNIT_TESTS "Build Unit Tests"	ON)
 
-IF (BUILD_UNIT_TESTS)
-	ENABLE_TESTING()
-	SUBDIRS(test)
-ENDIF()
+#IF (BUILD_UNIT_TESTS)
+#	ENABLE_TESTING()
+#	SUBDIRS(test)
+#ENDIF()
 
 set (BULLET_CONFIG_CMAKE_PATH lib${LIB_SUFFIX}/cmake/bullet )
 list (APPEND BULLET_LIBRARIES LinearMath)
